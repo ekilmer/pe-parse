@@ -45,6 +45,8 @@ file(
         dump-pe/*.cpp
         examples/*.cpp
         examples/*.h
+        test/*.cpp
+        test/*.h
 )
 add_custom_target(
   peparse_format

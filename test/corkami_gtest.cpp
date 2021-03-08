@@ -20,8 +20,9 @@ TEST_P(CorkamiTestSuite, Corkami) {
   DestructParsedPE(p);
 }
 
-INSTANTIATE_TEST_SUITE_P(CorkamiTests, CorkamiTestSuite,
-                         testing::ValuesIn(PEFilesInDir(CORKAMI_PE_PATH));
+INSTANTIATE_TEST_SUITE_P(CorkamiTests,
+                         CorkamiTestSuite,
+                         testing::ValuesIn(PEFilesInDir(CORKAMI_PE_PATH)));
 
-}  // namespace peparse
+} // namespace peparse
 #endif

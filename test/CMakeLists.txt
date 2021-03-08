@@ -1,5 +1,18 @@
 include(CTest)
 
+# Path for corkami dataset
+set(CORKAMI_SUBMODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/assets/corkami-poc-dataset")
+set(CORKAMI_PE_PATH "${CORKAMI_SUBMODULE_PATH}/PE/bin")
+
+if (NOT EXISTS "${CORKAMI_PE_PATH}")
+  message(WARNING "Could not find Corkami dataset for testing.\nUse 'git submodule update --init'")
+endif()
+
+# To reconfigure and rebuild when submodule status changes
+# See https://gitlab.kitware.com/cmake/cmake/-/issues/18755 to read why using
+# (potentially non-existant) CORKAMI_PE_PATH doesn't work
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${CORKAMI_SUBMODULE_PATH}")
+
 ### Catch2
 if (NOT USE_EXTERNAL_CATCH2)
   include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch.cmake.in")
@@ -15,11 +28,7 @@ add_executable(tests
 target_compile_definitions(tests PRIVATE ASSETS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets")
 target_link_libraries(tests PRIVATE pe-parse Catch2::Catch2)
 
-# Look for corkami dataset
-set(CORKAMI_PE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/assets/corkami-poc-dataset/PE/bin")
-if (NOT EXISTS "${CORKAMI_PE_PATH}")
-  message(WARNING "Could not find Corkami dataset for testing. Use 'git submodule update --init'")
-else()
+if (EXISTS "${CORKAMI_PE_PATH}")
   target_compile_definitions(tests PRIVATE CORKAMI_PE_PATH="${CORKAMI_PE_PATH}")
 endif()
 
@@ -36,10 +45,7 @@ target_include_directories(gtests PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 target_compile_definitions(gtests PRIVATE ASSETS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets")
 
 # Look for corkami dataset
-set(CORKAMI_PE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/assets/corkami-poc-dataset/PE/bin")
-if (NOT EXISTS "${CORKAMI_PE_PATH}")
-  message(WARNING "Could not find Corkami dataset for testing. Use 'git submodule update --init'")
-else()
+if (EXISTS "${CORKAMI_PE_PATH}")
   target_compile_definitions(gtests PRIVATE CORKAMI_PE_PATH="${CORKAMI_PE_PATH}")
 endif()
 

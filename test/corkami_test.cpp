@@ -17,11 +17,12 @@ TEST_CASE("Corkami PEs smoketest", "[corkami]") {
       if (p == nullptr) {
         FAIL(GetPEErrString() + " at " + GetPEErrLoc());
       }
-      SUCCEED();
       DestructParsedPE(p);
+      SUCCEED();
     }
   }
+  WARN("Could not find Corkami dataset");
 }
 
-}  // namespace peparse
+} // namespace peparse
 #endif

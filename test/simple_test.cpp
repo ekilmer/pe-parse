@@ -1,7 +1,7 @@
 #include <pe-parse/parse.h>
 
-#include <filesystem>
 #include <catch2/catch.hpp>
+#include <filesystem>
 
 namespace fs = std::filesystem;
 
@@ -13,7 +13,7 @@ TEST_CASE("Simple testing of PE", "[example.exe]") {
 
   REQUIRE(p);
 
-  SECTION( "dos header correctness" ) {
+  SECTION("dos header correctness") {
     auto dos = p->peHeader.dos;
     REQUIRE(dos.e_magic == 0x5a4d);
     REQUIRE(dos.e_cp == 0x3);
@@ -50,4 +50,4 @@ TEST_CASE("Simple testing of PE", "[example.exe]") {
   DestructParsedPE(p);
 }
 
-}  // namespace peparse
+} // namespace peparse
