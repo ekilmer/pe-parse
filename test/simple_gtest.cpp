@@ -1,13 +1,15 @@
-#include <gtest/gtest.h>
-
 #include <pe-parse/parse.h>
 
-#include "peparse_test_paths.h"
+#include <filesystem>
+#include <gtest/gtest.h>
+
+
+namespace fs = std::filesystem;
 
 using namespace peparse;
 
 TEST(SimpleTestPE, example) {
-  auto path = std::string(kAssetsDir) + "example.exe";
+  auto path = fs::path(ASSETS_DIR) / "example.exe";
   auto *p = ParsePEFromFile(path.c_str());
 
   EXPECT_TRUE(p);

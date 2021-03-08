@@ -1,4 +1,0 @@
-#pragma once
-
-// An absolute path to the pe-parse `test/assets` directory
-static constexpr auto kAssetsDir = "@CMAKE_CURRENT_SOURCE_DIR@/assets/";
