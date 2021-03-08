@@ -7,6 +7,9 @@
 
 using namespace peparse;
 
+// Whether the corkami testset has been downloaded
+#if @HAS_CORKAMI_PES@
+
 static std::string CORKAMI_FILES[] = {@CORKAMI_FILES@};
 
 TEST_CASE( "Corkami PEs smoketest", "[corkami]" ) {
@@ -22,3 +25,5 @@ TEST_CASE( "Corkami PEs smoketest", "[corkami]" ) {
     }
   }
 }
+
+#endif
