@@ -22,8 +22,8 @@ endif()
 
 add_executable(tests
   catch_main.cpp
-  simple_test.cpp
-  corkami_test.cpp
+  simple_catch_test.cpp
+  corkami_catch_test.cpp
   )
 target_compile_definitions(tests PRIVATE ASSETS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets")
 target_link_libraries(tests PRIVATE pe-parse Catch2::Catch2)
